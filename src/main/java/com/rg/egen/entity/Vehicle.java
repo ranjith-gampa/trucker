@@ -1,5 +1,6 @@
 package com.rg.egen.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Vehicle {
 
     @Column(columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "YYYY-MM-DDThh:mm:ss.sTZD")
+    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss.s")
     private Date lastServiceDate;
 
     public String getVin() {

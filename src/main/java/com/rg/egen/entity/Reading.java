@@ -1,5 +1,7 @@
 package com.rg.egen.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -32,13 +34,13 @@ public class Reading {
     @Column(columnDefinition = "INT(5)")
     private int engineHp;
 
-    @Column(columnDefinition = "TINYINT(1)")
+    @Column(nullable = false, columnDefinition = "BIT", length = 1)
     private boolean checkEngineLightOn;
 
-    @Column(columnDefinition = "TINYINT(1)")
+    @Column(nullable = false, columnDefinition = "BIT", length = 1)
     private boolean engineCoolantLow;
 
-    @Column(columnDefinition = "TINYINT(1)")
+    @Column(nullable = false, columnDefinition = "BIT", length = 1)
     private boolean cruiseControlOn;
 
     @Column(columnDefinition = "INT(5)")

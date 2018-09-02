@@ -25,6 +25,11 @@ public class VehicleController {
         return service.findAll();
     }
 
+    @GetMapping(path = "/{vin}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Vehicle findOne(@PathVariable String vin) {
+        return service.findOne(vin);
+    }
+
     @RequestMapping(method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
