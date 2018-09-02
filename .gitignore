@@ -1,5 +1,6 @@
-.idea
-.properties
-.class
-.jar
-.lst
+*.idea
+*.properties
+*.class
+*.jar
+*.lst
+*.original
