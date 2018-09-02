@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.DateFormat;
 import java.util.Date;
 
 @Entity
@@ -30,7 +31,6 @@ public class Vehicle {
 
     @Column(columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "YYYY-MM-DDThh:mm:ss.sTZD")
-    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss.s")
     private Date lastServiceDate;
 
     public String getVin() {
@@ -81,8 +81,8 @@ public class Vehicle {
         this.maxFuelVolume = maxFuelVolume;
     }
 
-    public Date getLastServiceDate() {
-        return lastServiceDate;
+    public String getLastServiceDate() {
+        return DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(lastServiceDate);
     }
 
     public void setLastServiceDate(Date lastService) {
