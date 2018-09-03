@@ -12,7 +12,4 @@ public interface ReadingService {
 
     Reading create(Reading reading);
 
-    Reading update(Reading reading);
-
-    void delete(String id);
 }
