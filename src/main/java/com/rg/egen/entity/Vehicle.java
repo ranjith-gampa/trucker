@@ -30,7 +30,6 @@ public class Vehicle {
 
     @Column(columnDefinition = "DATETIME")
     @DateTimeFormat(pattern = "YYYY-MM-DDThh:mm:ss.sTZD")
-    @JsonFormat(pattern = "YYYY-MM-DD hh:mm:ss.s")
     private Date lastServiceDate;
 
     public String getVin() {

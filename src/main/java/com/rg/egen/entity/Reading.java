@@ -1,9 +1,11 @@
 package com.rg.egen.entity;
 
-import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -13,25 +15,26 @@ public class Reading {
     @Column(columnDefinition = "VARCHAR(36)")
     private String id;
 
-    @Column(columnDefinition = "VARCHAR(20)")
+    @Column(columnDefinition = "VARCHAR(17)")
     private String vin;
 
-    @Column(columnDefinition = "DATETIME(6)")
-    private Timestamp timeStamp;
+    @Column(columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "YYYY-MM-DDThh:mm:ss.sTZD")
+    private Date timestamp;
 
-    @Column(columnDefinition = "DECIMAL(10)")
+    @Column(columnDefinition = "DECIMAL(10,8)")
     private double latitude;
 
-    @Column(columnDefinition = "DECIMAL(10)")
+    @Column(columnDefinition = "DECIMAL(11,8)")
     private double longitude;
 
-    @Column(columnDefinition = "DECIMAL(3)")
+    @Column(columnDefinition = "DECIMAL(3,1)")
     private double fuelVolume;
 
     @Column(columnDefinition = "DECIMAL(3)")
     private double speed;
 
-    @Column(columnDefinition = "INT(5)")
+    @Column(columnDefinition = "VARCHAR(4)")
     private int engineHp;
 
     @Column(nullable = false, columnDefinition = "BIT", length = 1)
@@ -43,10 +46,11 @@ public class Reading {
     @Column(nullable = false, columnDefinition = "BIT", length = 1)
     private boolean cruiseControlOn;
 
-    @Column(columnDefinition = "INT(5)")
-    private int rpm;
+    @Column(columnDefinition = "VARCHAR(4)")
+    private int engineRpm;
 
-    @OneToOne(fetch= FetchType.LAZY)
+    @OneToOne(fetch= FetchType.LAZY,
+    cascade =  CascadeType.ALL)
     private Tires tires;
 
     public Reading() {
@@ -65,12 +69,12 @@ public class Reading {
         this.vin = vin;
     }
 
-    public Timestamp getTimeStamp() {
-        return timeStamp;
+    public String getTimestamp() {
+        return DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(timestamp);
     }
 
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(Timestamp timeStamp) {
+        this.timestamp = timeStamp;
     }
 
     public double getLatitude() {
@@ -137,12 +141,12 @@ public class Reading {
         this.cruiseControlOn = cruiseControlOn;
     }
 
-    public int getRpm() {
-        return rpm;
+    public int getEngineRpm() {
+        return engineRpm;
     }
 
-    public void setRpm(int rpm) {
-        this.rpm = rpm;
+    public void setEngineRpm(int rpm) {
+        this.engineRpm = rpm;
     }
 
     public Tires getTires() {
@@ -158,6 +162,7 @@ public class Reading {
         return "Reading{" +
                 "id='" + id + '\'' +
                 ", vin='" + vin + '\'' +
+                ", timestamp=" + timestamp +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", fuelVolume=" + fuelVolume +
@@ -166,7 +171,7 @@ public class Reading {
                 ", checkEngineLightOn=" + checkEngineLightOn +
                 ", engineCoolantLow=" + engineCoolantLow +
                 ", cruiseControlOn=" + cruiseControlOn +
-                ", rpm=" + rpm +
+                ", engineRpm=" + engineRpm +
                 ", tires=" + tires +
                 '}';
     }

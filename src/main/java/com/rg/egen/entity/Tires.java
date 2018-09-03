@@ -11,16 +11,16 @@ public class Tires {
     //@GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
-    @Column(columnDefinition = "INT(2)")
+    @Column(columnDefinition = "VARCHAR(2)")
     private int frontLeft;
 
-    @Column(columnDefinition = "INT(2)")
+    @Column(columnDefinition = "VARCHAR(2)")
     private int frontRight;
 
-    @Column(columnDefinition = "INT(2)")
+    @Column(columnDefinition = "VARCHAR(2)")
     private int rearLeft;
 
-    @Column(columnDefinition = "INT(2)")
+    @Column(columnDefinition = "VARCHAR(2)")
     private int rearRight;
 
     public Tires() {
