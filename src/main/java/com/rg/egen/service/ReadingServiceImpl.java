@@ -7,10 +7,14 @@ import com.rg.egen.exception.ReadingNotFoundException;
 import com.rg.egen.repository.AlertRepository;
 import com.rg.egen.repository.ReadingsRepository;
 import com.rg.egen.repository.VehicleRepository;
+import com.rg.egen.rules.FuelRule;
+import org.jeasy.rules.api.Facts;
+import org.jeasy.rules.api.Rules;
+import org.jeasy.rules.api.RulesEngine;
+import org.jeasy.rules.core.DefaultRulesEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,6 +63,14 @@ public class ReadingServiceImpl implements ReadingService {
             System.out.println(e.getMessage());
         }
         if(existing.isPresent()) {
+            if(reading.getFuelVolume() < 0.1 * existing.get().getMaxFuelVolume()) {
+                Alert alert = new Alert();
+                alert.setVin(reading.getVin());
+                alert.setPriority("MEDIUM");
+                alert.setDescription("Low Fuel");
+                alert.setTimestamp(date);
+                alertRepository.save(alert);
+            }
             if(reading.getEngineRpm() > existing.get().getRedlineRpm()) {
                 Alert alert = new Alert();
                 alert.setVin(reading.getVin());
@@ -68,16 +80,7 @@ public class ReadingServiceImpl implements ReadingService {
                 alertRepository.save(alert);
                 System.out.println("Alert for Vehicle with VIN:- "+reading.getVin()+" with priority HIGH");
             }
-            if(reading.getFuelVolume() < 0.1*existing.get().getMaxFuelVolume()) {
-                Alert alert = new Alert();
-                alert.setVin(reading.getVin());
-                alert.setPriority("MEDIUM");
-                alert.setDescription("Low Fuel");
-                alert.setTimestamp(date);
-                alertRepository.save(alert);
-                System.out.println("Alert for Vehicle with VIN:- "+reading.getVin()+" with priority MEDIUM");
-            }
-            if(reading.getTires().getFrontLeft() < 32 || reading.getTires().getFrontLeft() > 36 || reading.getTires().getFrontRight() > 36 || reading.getTires().getFrontRight() < 32 || reading.getTires().getRearLeft() > 36 || reading.getTires().getRearLeft() < 32 || reading.getTires().getRearRight() > 36 || reading.getTires().getFrontRight() < 32) {
+            if(reading.getTires().getFrontLeft() < 32 || reading.getTires().getFrontLeft() > 36 || reading.getTires().getFrontRight() > 36 || reading.getTires().getFrontRight() < 32 || reading.getTires().getRearLeft() > 36 || reading.getTires().getRearLeft() < 32 || reading.getTires().getRearRight() > 36 || reading.getTires().getRearRight() < 32) {
                 Alert alert = new Alert();
                 alert.setVin(reading.getVin());
                 alert.setPriority("LOW");
