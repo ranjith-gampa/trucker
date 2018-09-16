@@ -69,6 +69,8 @@ public class ReadingServiceImpl implements ReadingService {
                 alert.setPriority("MEDIUM");
                 alert.setDescription("Low Fuel");
                 alert.setTimestamp(date);
+                alert.setLatitude(reading.getLatitude());
+                alert.setLongitude(reading.getLongitude());
                 alertRepository.save(alert);
             }
             if(reading.getEngineRpm() > existing.get().getRedlineRpm()) {
@@ -77,6 +79,8 @@ public class ReadingServiceImpl implements ReadingService {
                 alert.setPriority("HIGH");
                 alert.setDescription("High Engine Rpm");
                 alert.setTimestamp(date);
+                alert.setLatitude(reading.getLatitude());
+                alert.setLongitude(reading.getLongitude());
                 alertRepository.save(alert);
                 System.out.println("Alert for Vehicle with VIN:- "+reading.getVin()+" with priority HIGH");
             }
@@ -86,6 +90,8 @@ public class ReadingServiceImpl implements ReadingService {
                 alert.setPriority("LOW");
                 alert.setDescription("High/Low Tire Pressure");
                 alert.setTimestamp(date);
+                alert.setLatitude(reading.getLatitude());
+                alert.setLongitude(reading.getLongitude());
                 alertRepository.save(alert);
                 System.out.println("Alert for Vehicle with VIN:- "+reading.getVin()+" with priority LOW");
             }
@@ -95,6 +101,8 @@ public class ReadingServiceImpl implements ReadingService {
                 alert.setPriority("LOW");
                 alert.setDescription("Engine Coolant Low / Engine Light On");
                 alert.setTimestamp(date);
+                alert.setLatitude(reading.getLatitude());
+                alert.setLongitude(reading.getLongitude());
                 alertRepository.save(alert);
                 System.out.println("Alert for Vehicle with VIN:- "+reading.getVin()+" with priority LOW");
             }

@@ -26,6 +26,28 @@ public class Alert {
     @DateTimeFormat(pattern = "YYYY-MM-DDThh:mm:ss.sTZD")
     private Date timestamp;
 
+    @Column(columnDefinition = "DECIMAL(10,8)")
+    private double latitude;
+
+    @Column(columnDefinition = "DECIMAL(11,8)")
+    private double longitude;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     public String getVin() {
         return vin;
     }
@@ -74,6 +96,8 @@ public class Alert {
                 ", priority='" + priority + '\'' +
                 ", description='" + description + '\'' +
                 ", timestamp=" + timestamp +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 '}';
     }
 }

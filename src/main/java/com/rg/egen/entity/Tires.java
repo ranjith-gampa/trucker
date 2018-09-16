@@ -7,9 +7,9 @@ import java.util.UUID;
 public class Tires {
 
     @Id
-    @Column(columnDefinition = "VARCHAR(36)")
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @Column(columnDefinition = "VARCHAR(10)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(columnDefinition = "VARCHAR(2)")
     private int frontLeft;
@@ -24,7 +24,6 @@ public class Tires {
     private int rearRight;
 
     public Tires() {
-        this.id = UUID.randomUUID().toString();
     }
 
     public int getFrontLeft() {
@@ -59,11 +58,22 @@ public class Tires {
         this.rearRight = rearRight;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tires{" +
+                "id='" + id + '\'' +
+                ", frontLeft=" + frontLeft +
+                ", frontRight=" + frontRight +
+                ", rearLeft=" + rearLeft +
+                ", rearRight=" + rearRight +
+                '}';
     }
 }

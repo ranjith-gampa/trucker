@@ -9,7 +9,6 @@ node {
 
     stage("git checkout") {
         checkout scm
-
         def GIT_COMMIT = sh(returnStdout: true, script: "git rev-parse HEAD").trim().take(7)
         DOCKER_IMAGE_VERSION = "${BUILD_NUMBER}-${GIT_COMMIT}"
     }

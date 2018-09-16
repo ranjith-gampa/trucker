@@ -1,5 +1,6 @@
 package com.rg.egen.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -49,7 +50,7 @@ public class Reading {
     @Column(columnDefinition = "VARCHAR(4)")
     private int engineRpm;
 
-    @OneToOne(fetch= FetchType.LAZY,
+    @OneToOne(fetch= FetchType.EAGER,
     cascade =  CascadeType.ALL)
     private Tires tires;
 
