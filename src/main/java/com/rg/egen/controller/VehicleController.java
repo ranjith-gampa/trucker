@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicles")
-@CrossOrigin(origins = "http://mocker.egen.io")
+@CrossOrigin(origins = {"http://mocker.egen.io", "http://mocker.ennate.academy"})
 public class VehicleController {
 
     private final VehicleService service;

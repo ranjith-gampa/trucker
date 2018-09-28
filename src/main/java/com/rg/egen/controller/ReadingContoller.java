@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/readings")
-@CrossOrigin(origins = "http://mocker.egen.io")
+@CrossOrigin(origins = {"http://mocker.egen.io", "http://mocker.ennate.academy"})
 public class ReadingContoller {
 
     private final ReadingService service;
